@@ -1,0 +1,40 @@
+launch:
+
+# - include:
+#     file: "$(find-pkg-share uvlarm-gally)/scripts/tuto_vision2.py"
+
+# - include:
+#     file: "$(find-pkg-share uvlarm-gally)/launch/visual_launch.yaml"
+
+# - include:
+#     file: "$(find-pkg-share tbot_node)/launch/minimal_launch.yaml"
+
+#- include:
+#    file: "$(find-pkg-share uvlarm-gally)/launch/challenge-1.launch.py"
+
+- node:
+    pkg: "rviz2"
+    exec: "rviz2"
+    name: "rviz2"
+
+# - node:
+#     pkg: "werobot"
+#     exec: "robot_move.py"
+#     name: "ranmove"
+
+- executable:
+     cmd: 'ros2 launch slam_toolbox online_sync_launch.py use_sim_time:=False'
+
+# - executable:
+#     cmd: 'ros2 launch nav2_bringup localization_launch.py map:=/home/ros/map.yaml autostart:=True'
+
+
+# - node:
+#     pkg: "werobot"
+#     exec: "scan_echo1.py"
+#     name: "laserscan"
+
+
+
+# - executable:
+#     cmd: gnome-terminal --tab -e 'ros2 run teleop_twist_keyboard teleop_twist_keyboard cmd_vel:=/multi/cmd_teleop'
