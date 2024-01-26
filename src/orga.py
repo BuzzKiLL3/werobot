@@ -1,6 +1,7 @@
 import rclpy
 from std_msgs.msg import String
 import subprocess
+import time
 
 def start_program(program_path):
     print(f"Starting move: {program_path}")
@@ -10,9 +11,9 @@ def message_callback(msg):
     message = msg.data
     print(f"Received message: {message}")
 
-    if message == "init":
+    if message == "arm_done":
         start_program("initialposepub.py")
-    elif message == "random":
+        time.sleep(2)
         start_program("move.py")
     elif message == "stop_program":
         print("Stopping the program...")
