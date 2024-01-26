@@ -10,10 +10,10 @@ def message_callback(msg):
     message = msg.data
     print(f"Received message: {message}")
 
-    if message == "start_program1":
-        start_program("path/to/program1.py")
-    elif message == "start_program2":
-        start_program("path/to/program2.py")
+    if message == "init":
+        start_program("initialposepub.py")
+    elif message == "random":
+        start_program("move.py")
     elif message == "stop_program":
         print("Stopping the program...")
         # Perform the task for stopping the program
@@ -24,10 +24,10 @@ def main():
     rclpy.init()
 
     # Create a ROS 2 node
-    node = rclpy.create_node('subscriber_node')
+    node = rclpy.create_node('orga_sub')
 
     # Create a subscriber for the specified topic
-    topic_name = 'your_topic'
+    topic_name = 'orga_topic'
     subscriber = node.create_subscription(String, topic_name, message_callback, 10)
 
     # Print the topic being subscribed to
