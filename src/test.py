@@ -1,6 +1,5 @@
 import rclpy
 from std_msgs.msg import String
-import time
 
 def publish_message():
     rclpy.init()
@@ -18,10 +17,10 @@ def publish_message():
     publisher.publish(message)
     print(f"Published message: {message.data}")
 
-    # Give some time for the message to be published
-    time.sleep(1)
+    # Keep the node running
+    rclpy.spin(node)
 
-    # Cleanup
+    # Cleanup (this will not be executed until the node is manually stopped)
     node.destroy_node()
     rclpy.shutdown()
 
