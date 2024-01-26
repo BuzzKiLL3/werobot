@@ -1,4 +1,6 @@
 from pyniryo2 import *
+import rclpy
+from std_msgs.msg import String
 
 # - Constants
 workspace_name = "workspace_fixe_V2"  # Robot's Workspace Name
@@ -83,3 +85,30 @@ get_object(ObjectShape.CIRCLE, ObjectColor.RED,place_pose_circle_red)
 robot.arm.go_to_sleep()
 
 robot.end()
+
+
+def publish_message():
+    rclpy.init()
+
+    # Create a ROS 2 node
+    node = rclpy.create_node('orga_pub')
+
+    # Create a publisher for the specified topic
+    topic_name = 'orga_topic'
+    publisher = node.create_publisher(String, topic_name, 10)
+
+    # Publish a string message
+    message = String()
+    message.data = 'arm_done'
+    publisher.publish(message)
+    print(f"Published message: {message.data}")
+
+    # Keep the node running
+    rclpy.spin(node)
+
+    # Cleanup (this will not be executed until the node is manually stopped)
+    node.destroy_node()
+    rclpy.shutdown()
+
+#after finishing your condition add this command
+# publish_message()
